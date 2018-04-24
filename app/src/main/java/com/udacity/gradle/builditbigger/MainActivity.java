@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void tellJoke(View view) {
 
-        new EndpointsAsyncTask().execute();
+        new EndpointsAsyncTask().execute(this);
 //        Intent intent = new Intent(this, JokeDisplayActivity.class);
 //        Joker mJoker = new Joker();
 //        String joke = mJoker.getJoke();

@@ -21,9 +21,9 @@
  "kind": "discovery#restDescription",
  "methods": {
   "showJoke": {
-   "httpMethod": "GET",
+   "httpMethod": "POST",
    "id": "myApi.showJoke",
-   "path": "mybean",
+   "path": "showJoke",
    "response": {
     "$ref": "MyBean"
    },

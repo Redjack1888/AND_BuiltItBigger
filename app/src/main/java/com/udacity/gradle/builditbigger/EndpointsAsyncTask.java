@@ -23,17 +23,17 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     private static MyApi myApiService = null;
     private Context context;
-    private TaskCompleteListener mTaskCompleteListener;
+//    private TaskCompleteListener mTaskCompleteListener;
     private static final String LOCALHOST_IP_ADDRESS = "http://10.0.2.2:8080/_ah/api/";
 
-    public interface TaskCompleteListener {
-
-        void onTaskComplete(String result);
-    }
-
-    public EndpointsAsyncTask(TaskCompleteListener listener) {
-        mTaskCompleteListener = listener;
-    }
+//    public interface TaskCompleteListener {
+//
+//        void onTaskComplete(String result);
+//    }
+//
+//    public EndpointsAsyncTask(TaskCompleteListener listener) {
+//        mTaskCompleteListener = listener;
+//    }
 
     @Override
     protected String doInBackground(Context... params) {
@@ -55,7 +55,7 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-//        context = params[0].first;
+        context = params[0];
 //        String name = params[0].second;
 
         try {
@@ -67,12 +67,12 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        if (result != null) {
-            mTaskCompleteListener.onTaskComplete(result);
-            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        } else {
-            Log.d(TAG, context.getString(R.string.error_fetching_joke));
-        }
+        // Create Intent to launch JokeFactory Activity
+        Intent intent = new Intent(context, JokeDisplayActivity.class);
+        // Put the string in the envelope
+        intent.putExtra(JokeDisplayActivity.JOKE_KEY,result);
+        context.startActivity(intent);
 
+        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
 }
