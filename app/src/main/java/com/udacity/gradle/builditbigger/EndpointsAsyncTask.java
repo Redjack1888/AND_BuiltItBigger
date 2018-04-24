@@ -19,7 +19,8 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+
     private static MyApi myApiService = null;
     private Context context;
     private TaskCompleteListener mTaskCompleteListener;
@@ -35,7 +36,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Context... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -54,8 +55,8 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+//        context = params[0].first;
+//        String name = params[0].second;
 
         try {
             return myApiService.showJoke().execute().getData();
@@ -68,10 +69,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     protected void onPostExecute(String result) {
         if (result != null) {
             mTaskCompleteListener.onTaskComplete(result);
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
         } else {
             Log.d(TAG, context.getString(R.string.error_fetching_joke));
         }
 
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
 }
