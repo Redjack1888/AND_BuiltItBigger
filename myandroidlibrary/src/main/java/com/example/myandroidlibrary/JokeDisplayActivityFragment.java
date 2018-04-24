@@ -25,6 +25,8 @@ public class JokeDisplayActivityFragment extends Fragment {
         TextView jokeTextView = root.findViewById(R.id.joke_textview);
         if (joke != null && joke.length() != 0) {
             jokeTextView.setText(joke);
+        }else {
+            jokeTextView.setText(R.string.dig_deeper);
         }
 
         return root;
