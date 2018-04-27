@@ -44,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view) {
-
-        new EndpointsAsyncTask().execute(this);
-//        Intent intent = new Intent(this, JokeDisplayActivity.class);
-//        Joker mJoker = new Joker();
-//        String joke = mJoker.getJoke();
-//        intent.putExtra(JokeDisplayActivity.JOKE_KEY, joke);
-//        startActivity(intent);
-    }
+//    public void tellJoke(View view) {
+//
+//        new EndpointsAsyncTask().execute(this);
+////        Intent intent = new Intent(this, JokeDisplayActivity.class);
+////        Joker mJoker = new Joker();
+////        String joke = mJoker.getJoke();
+////        intent.putExtra(JokeDisplayActivity.JOKE_KEY, joke);
+////        startActivity(intent);
+//    }
 
 
 }

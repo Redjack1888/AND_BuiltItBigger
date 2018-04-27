@@ -19,9 +19,10 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 
-class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
     private static MyApi myApiService = null;
+    private MainActivityFragment mainActivityFragment;
     private Context context;
 //    private TaskCompleteListener mTaskCompleteListener;
     private static final String LOCALHOST_IP_ADDRESS = "http://10.0.2.2:8080/_ah/api/";
@@ -36,8 +37,7 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 //    }
 
     @Override
-    protected String doInBackground(Context... params) {
-        if(myApiService == null) {  // Only do this once
+    protected String doInBackground(MainActivityFragment... params) {        if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
@@ -55,7 +55,8 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             myApiService = builder.build();
         }
 
-        context = params[0];
+        mainActivityFragment = params[0];
+        context = mainActivityFragment.getActivity();
 //        String name = params[0].second;
 
         try {
@@ -67,12 +68,15 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        // Create Intent to launch JokeFactory Activity
-        Intent intent = new Intent(context, JokeDisplayActivity.class);
-        // Put the string in the envelope
-        intent.putExtra(JokeDisplayActivity.JOKE_KEY,result);
-        context.startActivity(intent);
+//        // Create Intent to launch JokeFactory Activity
+//        Intent intent = new Intent(context, JokeDisplayActivity.class);
+//        // Put the string in the envelope
+//        intent.putExtra(JokeDisplayActivity.JOKE_KEY,result);
+//        context.startActivity(intent);
+//
+//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        mainActivityFragment.loadedJoke = result;
+        mainActivityFragment.launchDisplayJokeActivity();
     }
 }
