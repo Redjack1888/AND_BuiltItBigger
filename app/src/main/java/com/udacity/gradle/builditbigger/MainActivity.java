@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements
         this.startActivity(intent);
         asyncTaskCallback.callBack(joke);
     }
-
+}
 //    public void tellJoke(View view) {
 //
 //        new EndpointsAsyncTask().execute(this);
@@ -64,4 +64,4 @@ public class MainActivity extends AppCompatActivity implements
 //    }
 
 
-}
+

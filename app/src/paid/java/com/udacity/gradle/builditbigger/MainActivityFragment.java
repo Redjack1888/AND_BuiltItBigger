@@ -22,17 +22,20 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
-    ProgressBar progressBar = null;
-    public String loadedJoke = null;
-    public boolean testFlag = false;
+    private View root;
+    private ProgressBar progressBar;
+    private Button button;
+
+//    public String loadedJoke = null;
+//    public boolean testFlag = false;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
+        root = inflater.inflate(R.layout.fragment_main, container, false);
 
         // Set onClickListener for the button
-        Button button = root.findViewById(R.id.joke_button);
+        button = root.findViewById(R.id.joke_button);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -47,18 +50,19 @@ public class MainActivityFragment extends Fragment {
         return root;
     }
     public void tellJoke(){
-        new EndpointsAsyncTask().execute(this);
-    }
+        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(getContext(), root);
 
-    public void launchDisplayJokeActivity(){
-        if (!testFlag) {
-            Context context = getActivity();
-            Intent intent = new Intent(context, JokeDisplayActivity.class);
-            assert context != null;
-            intent.putExtra(context.getString(R.string.jokeEnvelope), loadedJoke);
-            context.startActivity(intent);
-            progressBar.setVisibility(View.GONE);
-        }
-
+        endpointsAsyncTask.execute();
     }
 }
+//    public void launchDisplayJokeActivity(){
+//        if (!testFlag) {
+//            Context context = getActivity();
+//            Intent intent = new Intent(context, JokeDisplayActivity.class);
+//            assert context != null;
+//            intent.putExtra(context.getString(R.string.jokeEnvelope), loadedJoke);
+//            context.startActivity(intent);
+//            progressBar.setVisibility(View.GONE);
+//        }
+//
+//    }
