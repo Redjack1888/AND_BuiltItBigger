@@ -1,16 +1,25 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.myandroidlibrary.JokeDisplayActivity;
+
+public class MainActivity extends AppCompatActivity implements
+        EndpointsAsyncTask.AsyncTaskCallback {
+
+    public Context mContext;
+    public EndpointsAsyncTask.AsyncTaskCallback asyncTaskCallback = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = getApplicationContext();
 
     }
 
@@ -34,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void callBack(String joke) {
+        Intent intent = new Intent(this, JokeDisplayActivity.class);
+        intent.putExtra(JokeDisplayActivity.JOKE_KEY, joke);
+        this.startActivity(intent);
+        asyncTaskCallback.callBack(joke);
     }
 
 //    public void tellJoke(View view) {
