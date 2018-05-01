@@ -31,42 +31,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    // Specifies two flavor dimensions.
-    flavorDimensions "type"
-
-    productFlavors {
-        free {
-            applicationId "com.udacity.gradle.builditbigger.free"
-            dimension "type"
-        }
-        paid {
-            applicationId "com.udacity.gradle.builditbigger.paid"
-            dimension "type"
-            minSdkVersion 21
-        }
-    }
-
-    sourceSets {
-        free {
-            manifest.srcFile 'src/free/AndroidManifest.xml'
-        }
-        paid {
-            manifest.srcFile 'src/paid/AndroidManifest.xml'
-        }
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.0'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
-    implementation project(':jokeLib')
-    implementation project(':myandroidlibrary')
+    implementation project (':jokeLib')
+    implementation project (':myandroidlibrary')
 
     // Implementations due for a warning about different library versions
     // solutions found on Stack Overflow - http://bit.ly/2HvNHcz
@@ -83,6 +59,4 @@ dependencies {
     androidTestImplementation 'com.android.support:support-annotations:27.1.1'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
-
-    freeImplementation 'com.google.android.gms:play-services-ads:15.0.0'
 }

@@ -1,11 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
-import android.view.View;
-import android.widget.ProgressBar;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.myandroidlibrary.JokeDisplayActivity;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -16,15 +17,14 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+import static android.content.ContentValues.TAG;
+
+class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
     private static MyApi myApiService = null;
-
-    public View mView;
-
-    public Context mContext;
-    private ProgressBar progressBar;
-
+    private MainActivityFragment mainActivityFragment;
+    private Context context;
+//    private TaskCompleteListener mTaskCompleteListener;
     private static final String LOCALHOST_IP_ADDRESS = "http://10.0.2.2:8080/_ah/api/";
 
 //    public interface TaskCompleteListener {
@@ -32,17 +32,12 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 //        void onTaskComplete(String result);
 //    }
 //
-
-public EndpointsAsyncTask(Context context, View view) {
-    this.mContext = context;
-    this.mView = view;
-
-}
+//    public EndpointsAsyncTask(TaskCompleteListener listener) {
+//        mTaskCompleteListener = listener;
+//    }
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
-
-        if(myApiService == null) {  // Only do this once
+    protected String doInBackground(MainActivityFragment... params) {        if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
@@ -60,12 +55,12 @@ public EndpointsAsyncTask(Context context, View view) {
             myApiService = builder.build();
         }
 
-//        mainActivityFragment = params[0];
-//        context = mainActivityFragment.getActivity();
-////        String name = params[0].second;
+        mainActivityFragment = params[0];
+        context = mainActivityFragment.getActivity();
+//        String name = params[0].second;
 
         try {
-            return String.valueOf(myApiService.showJoke().execute().getData());
+            return myApiService.showJoke().execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -73,19 +68,15 @@ public EndpointsAsyncTask(Context context, View view) {
 
     @Override
     protected void onPostExecute(String result) {
-        // Create Intent to launch JokeFactory Activity
-        Intent intent = new Intent(mContext, JokeDisplayActivity.class);
-        // Put the string in the envelope
-        intent.putExtra(JokeDisplayActivity.JOKE_KEY,result);
-        mContext.startActivity(intent);
+//        // Create Intent to launch JokeFactory Activity
+//        Intent intent = new Intent(context, JokeDisplayActivity.class);
+//        // Put the string in the envelope
+//        intent.putExtra(JokeDisplayActivity.JOKE_KEY,result);
+//        context.startActivity(intent);
 //
 //        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
-//        mainActivityFragment.loadedJoke = result;
-//        mainActivityFragment.launchDisplayJokeActivity();
-    }
-
-    public interface AsyncTaskCallback {
-        void callBack(String joke);
+        mainActivityFragment.loadedJoke = result;
+        mainActivityFragment.launchDisplayJokeActivity();
     }
 }
