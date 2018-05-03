@@ -20,3 +20,39 @@ allprojects {
         google()
     }
 }
+
+// Custom task to start engine, run test and finally stop engine
+// as explained and discussed on the Udacity forum:
+// "Last optional step: how to start an external module task from the
+// root build.gradle" - (AND P4 | Gradle for Android and Java)
+// http://bit.ly/2w9AxgL
+
+task startAppEngine (dependsOn: ":backend:appengineStart") {
+    doLast {
+        println "Task [startAppEngine] completed >> App Engine started"
+    }
+}
+
+task runAndroidTest (dependsOn: ":app:connectedAndroidTest") {
+    doLast {
+        println "Task [runAndroidTest] completed >> Test reports can be found at project-folder/app/build/reports directory"
+    }
+}
+
+task stopAppEngine (dependsOn: ":backend:appengineStop") {
+    doLast {
+        println "Task [stopAppEngine] completed >> App Engine stopped"
+    }
+}
+
+task myCustomTask (dependsOn: "startAppEngine") {
+    dependsOn "runAndroidTest"
+    mustRunAfter "startAppEngine"
+    doLast {
+        println "Task [myCustomTask] completed >> Task cycle completed"
+    }
+    finalizedBy "stopAppEngine"
+}
+
+runAndroidTest.mustRunAfter "startAppEngine"
+runAndroidTest.finalizedBy "stopAppEngine"
