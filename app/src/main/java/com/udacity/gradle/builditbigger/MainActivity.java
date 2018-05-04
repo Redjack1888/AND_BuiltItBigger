@@ -1,17 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-
-import com.example.jokelib.Joker;
-import com.example.myandroidlibrary.JokeDisplayActivity;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,16 +35,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void tellJoke(View view) {
-//
-//        new EndpointsAsyncTask().execute(this);
-////        Intent intent = new Intent(this, JokeDisplayActivity.class);
-////        Joker mJoker = new Joker();
-////        String joke = mJoker.getJoke();
-////        intent.putExtra(JokeDisplayActivity.JOKE_KEY, joke);
-////        startActivity(intent);
-//    }
-
 
 }

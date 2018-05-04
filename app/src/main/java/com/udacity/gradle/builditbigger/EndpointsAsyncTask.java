@@ -24,17 +24,7 @@ class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
     private static MyApi myApiService = null;
     private MainActivityFragment mainActivityFragment;
     private Context context;
-//    private TaskCompleteListener mTaskCompleteListener;
     private static final String LOCALHOST_IP_ADDRESS = "http://10.0.2.2:8080/_ah/api/";
-
-//    public interface TaskCompleteListener {
-//
-//        void onTaskComplete(String result);
-//    }
-//
-//    public EndpointsAsyncTask(TaskCompleteListener listener) {
-//        mTaskCompleteListener = listener;
-//    }
 
     @Override
     protected String doInBackground(MainActivityFragment... params) {        if(myApiService == null) {  // Only do this once
@@ -57,7 +47,6 @@ class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
         mainActivityFragment = params[0];
         context = mainActivityFragment.getActivity();
-//        String name = params[0].second;
 
         try {
             return myApiService.showJoke().execute().getData();
@@ -68,13 +57,6 @@ class EndpointsAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-//        // Create Intent to launch JokeFactory Activity
-//        Intent intent = new Intent(context, JokeDisplayActivity.class);
-//        // Put the string in the envelope
-//        intent.putExtra(JokeDisplayActivity.JOKE_KEY,result);
-//        context.startActivity(intent);
-//
-//        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
 
         mainActivityFragment.loadedJoke = result;
         mainActivityFragment.launchDisplayJokeActivity();
