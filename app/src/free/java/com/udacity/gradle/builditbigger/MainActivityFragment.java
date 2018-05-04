@@ -44,7 +44,7 @@ public class MainActivityFragment extends Fragment {
 
         //Set up for pre-fetching interstitial ad request
         mPublisherInterstitialAd = new PublisherInterstitialAd(getContext());
-        mPublisherInterstitialAd.setAdUnitId("/6499/example/interstitial");
+        mPublisherInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
 
         mPublisherInterstitialAd.setAdListener(new AdListener() {
             @Override
