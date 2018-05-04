@@ -123,7 +123,6 @@ public class MainActivityFragment extends Fragment {
             Intent intent = new Intent(context, JokeDisplayActivity.class);
             assert context != null;
             intent.putExtra(context.getString(R.string.jokeEnvelope), loadedJoke);
-            //Toast.makeText(context, loadedJoke, Toast.LENGTH_LONG).show();
             context.startActivity(intent);
             progressBar.setVisibility(View.GONE);
         }
