@@ -21,11 +21,11 @@ public class JokeDisplayActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_joke, container, false);
 
-        String joke = null;
+        String joke;
         Intent intent = getActivity().getIntent();
         joke = intent.getStringExtra(getString(R.string.jokeEnvelope));
 
-        TextView jokeTextView = root.findViewById(R.id.joke_textview);
+        TextView jokeTextView = root.findViewById(R.id.joke_text_view);
         if (joke != null && joke.length() != 0) {
             jokeTextView.setText(joke);
         }else {

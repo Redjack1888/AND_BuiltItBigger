@@ -2,8 +2,10 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherInterstitialAd;
 
+import java.util.Objects;
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -28,13 +32,14 @@ public class MainActivityFragment extends Fragment {
     public MainActivityFragment() {
     }
 
-    ProgressBar progressBar = null;
+    private ProgressBar progressBar = null;
     public String loadedJoke = null;
 
     public boolean testFlag = false;
-    PublisherInterstitialAd mPublisherInterstitialAd = null;
-    String LOG_TAG = "FREEDEBUG";
+    private PublisherInterstitialAd mPublisherInterstitialAd = null;
+    private final String LOG_TAG = "FREEDEBUG";
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -43,7 +48,7 @@ public class MainActivityFragment extends Fragment {
         AdView mAdView = root.findViewById(R.id.adView);
 
         //Set up for pre-fetching interstitial ad request
-        mPublisherInterstitialAd = new PublisherInterstitialAd(getContext());
+        mPublisherInterstitialAd = new PublisherInterstitialAd(Objects.requireNonNull(getContext()));
         mPublisherInterstitialAd.setAdUnitId(getString(R.string.interstitial_ad_unit_id));
 
         mPublisherInterstitialAd.setAdListener(new AdListener() {
