@@ -3,6 +3,7 @@ package com.example.myandroidlibrary;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class JokeDisplayActivityFragment extends Fragment {
         joke = intent.getStringExtra(getString(R.string.jokeEnvelope));
 
         TextView jokeTextView = root.findViewById(R.id.joke_text_view);
-        if (joke != null && joke.length() != 0) {
+        if (!TextUtils.isEmpty(joke)) {
             jokeTextView.setText(joke);
         }else {
             jokeTextView.setText(R.string.dig_deeper);
