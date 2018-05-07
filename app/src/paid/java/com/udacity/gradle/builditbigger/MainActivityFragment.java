@@ -12,9 +12,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 
 import com.example.myandroidlibrary.JokeDisplayActivity;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 
 /**
  * A placeholder fragment containing a simple view.
