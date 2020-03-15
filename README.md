@@ -167,3 +167,14 @@ Once you have a functioning project, consider adding more features to test your 
 * Make the free app variant display interstitial ads between the main activity and the joke-displaying activity.
 * Have the app display a loading indicator while the joke is being fetched from the server.
 * Write a Gradle task that starts the GCE dev server, runs all the Android tests, and shuts down the dev server.
+
+## Screenshots
+<table border="0">
+<tbody>
+<tr>
+<td><img src="https://github.com/Redjack1888/AND_BuiltItBigger/blob/master/assets/34324732-a97a6e74-e831-11e7-81ff-a64292783d91.png" width="300" height="533" /></td>
+<td><img src="https://github.com/Redjack1888/AND_BuiltItBigger/blob/master/assets/android-displaying-admob-interstitial-ad.png" width="300" height="533" /></td>
+<td><img src="https://github.com/Redjack1888/AND_BuiltItBigger/blob/master/assets/34324733-a9902296-e831-11e7-85fe-6b19cdde9840.png" width="300" height="533" /></td>
+</tr>
+</tbody>
+</table>
