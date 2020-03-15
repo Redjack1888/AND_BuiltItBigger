@@ -1,4 +1,5 @@
 # Built It Bigger
+![Cover](/assets/2e0fb57fdbb841a0a2528a1df0d18cb3_11_1280.jpg)
 
 In this project, you will create an app with multiple flavors that uses
 multiple libraries and Google Cloud Endpoints. The finished app will consist
